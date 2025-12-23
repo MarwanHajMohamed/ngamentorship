@@ -1,0 +1,11 @@
+:root {
+  --bg: #01304a;
+  --button: #01304a;
+  --button_hover: #004a72;
+}
+
+body {
+  font-family: Rubik;
+  margin: 0;
+  padding: 0;
+}
