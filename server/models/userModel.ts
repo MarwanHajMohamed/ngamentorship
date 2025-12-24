@@ -8,6 +8,8 @@ export interface IUser extends Document {
   isMentor: boolean;
   passwordHash: string;
   passwordSalt: string;
+  dob: string;
+  city: string;
   setPassword: (password: string) => void;
   validatePassword: (password: string) => boolean;
 }
@@ -20,6 +22,8 @@ const UserSchema: Schema = new Schema(
     isMentor: { type: Boolean, default: false },
     passwordHash: { type: String, required: true },
     passwordSalt: { type: String, required: true },
+    dob: { type: String, required: true },
+    city: { type: String, required: true },
   },
   { timestamps: true }
 );
