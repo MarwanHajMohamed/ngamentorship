@@ -5,6 +5,8 @@ export interface User {
   surname: string;
   email: string;
   password: string;
+  dob: string;
+  city: string;
   isMentor?: boolean;
 }
 

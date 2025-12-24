@@ -29,6 +29,8 @@ const authUser = asyncHandler(async (req, res) => {
       firstName: user.firstName,
       surname: user.surname,
       email: user.email,
+      dob: user.dob,
+      city: user.city,
       isMentor: user.isMentor,
     });
   } else {
@@ -42,7 +44,7 @@ const authUser = asyncHandler(async (req, res) => {
  * @access Public
  */
 const registerUser = asyncHandler(async (req: Request, res: Response) => {
-  const { firstName, surname, email, phone, password } = req.body;
+  const { firstName, surname, email, dob, city, password } = req.body;
 
   const userExists = await User.findOne({ email });
 
@@ -55,7 +57,8 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
     firstName,
     surname,
     email,
-    phone,
+    dob,
+    city,
     isMentor: false,
   });
 
@@ -71,6 +74,8 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
       firstName: user.firstName,
       surname: user.surname,
       email: user.email,
+      dob: user.dob,
+      city: user.city,
       isMentor: user.isMentor,
       token: generateToken(user._id.toString()),
     });
@@ -139,6 +144,8 @@ const updateUserDetails = asyncHandler(async (req: Request, res: Response) => {
       firstName: updatedUser.firstName,
       surname: updatedUser.surname,
       email: updatedUser.email,
+      dob: updatedUser.dob,
+      city: updatedUser.city,
       isMentor: updatedUser.isMentor,
     });
   } else {

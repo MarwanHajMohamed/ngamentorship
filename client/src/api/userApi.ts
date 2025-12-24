@@ -1,7 +1,7 @@
 import axios from "axios";
 import { User } from "../types/user";
 
-const API_URL = process.env.REACt_APP_API_URL || "http://localhost:5001";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5001";
 
 // HANDLE REGISTER
 export const handleRegister = async (

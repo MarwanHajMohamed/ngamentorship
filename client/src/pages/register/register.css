@@ -42,8 +42,21 @@
   margin-bottom: 20px;
 }
 
+.register-page-container .left-side form .row {
+  display: flex;
+  gap: 10px;
+}
+
 .register-page-container .left-side form input {
-  width: 300px;
+  width: 350px;
+}
+
+.register-page-container .left-side form .row input {
+  width: 155px;
+}
+
+.register-page-container .left-side form .row .date {
+  width: 184px;
 }
 
 .register-page-container .left-side .submit {
