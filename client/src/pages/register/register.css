@@ -1,10 +1,10 @@
-.login-page-container {
+.register-page-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100vh;
 }
 
-.login-page-container .left-side {
+.register-page-container .right-side {
   background-color: var(--bg);
   color: white;
   display: flex;
@@ -12,7 +12,7 @@
   justify-content: center;
 }
 
-.login-page-container .left-side .description {
+.register-page-container .right-side .description {
   height: 100%;
   display: flex;
   align-items: center;
@@ -21,23 +21,20 @@
   font-weight: 300;
 }
 
-.login-page-container .left-side .link {
+.register-page-container .right-side .link {
   margin: 50px;
-}
-
-.login-page-container .left-side .link span {
   text-decoration: underline;
   cursor: pointer;
 }
 
-.login-page-container .right-side {
+.register-page-container .left-side {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.login-page-container .right-side form {
+.register-page-container .left-side form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,31 +42,35 @@
   margin-bottom: 20px;
 }
 
-.login-page-container .right-side form input {
+.register-page-container .left-side form input {
   width: 300px;
 }
 
-.login-page-container .right-side .submit {
+.register-page-container .left-side .submit {
   display: flex;
   justify-content: flex-end;
   width: 100%;
 }
 
-.login-page-container .right-side .submit button {
+.register-page-container .left-side .submit button {
   background-color: var(--button);
   border: 0;
   color: white;
-  padding: 10px 20px;
+  width: 80px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 4px 4px rgb(0, 0, 0, 0.2);
   border-radius: 5px;
   cursor: pointer;
   transition: 100ms ease-in-out;
 }
 
-.login-page-container .right-side .submit button:hover {
+.register-page-container .left-side .submit button:hover {
   background-color: var(--button_hover);
 }
 
-.login-page-container .right-side img {
+.register-page-container .left-side img {
   width: 200px;
 }
