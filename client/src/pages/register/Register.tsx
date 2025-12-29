@@ -3,9 +3,9 @@ import "./register.css";
 import { TextField } from "@mui/material";
 import Logo from "../../assets/NGAMentorship.png";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import LoadingSpinner from "../../components/common components/SmallLoading/Loading.tsx";
-import { handleRegister } from "../../api/userApi.ts";
-import MessageBox from "../../components/MessageBox/MessageBox.tsx";
+import LoadingSpinner from "../../components/common components/SmallLoading/Loading";
+import { handleRegister } from "../../api/userApi";
+import MessageBox from "../../components/MessageBox/MessageBox";
 import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -168,7 +168,7 @@ const Register = () => {
           NGA Mentorship provides a platform for NGA students to collaborate and
           grow under the guidance of their mentors.
         </div>
-        <div className="link" onClick={() => navigate("/")}>
+        <div className="link" onClick={() => navigate("/login")}>
           Login here
         </div>
       </div>

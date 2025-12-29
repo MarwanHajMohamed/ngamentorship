@@ -3,9 +3,9 @@ import "./login.css";
 import { TextField } from "@mui/material";
 import Logo from "../../assets/NGAMentorship.png";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import LoadingSpinner from "../../components/common components/SmallLoading/Loading.tsx";
-import { handleLogin } from "../../api/userApi.ts";
-import MessageBox from "../../components/MessageBox/MessageBox.tsx";
+import LoadingSpinner from "../../components/common components/SmallLoading/Loading";
+import { handleLogin } from "../../api/userApi";
+import MessageBox from "../../components/MessageBox/MessageBox";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -35,8 +35,7 @@ const Login = () => {
     try {
       await handleLogin(email, password).then((res) => {
         if (res === "success") {
-          navigate("/dashboard");
-          window.location.reload();
+          navigate("/");
         } else {
           setMessage({
             text: "Email or password do not match.",
@@ -81,7 +80,7 @@ const Login = () => {
             onChange={(e) => handleChange(setPassword, e.target.value)}
           />
           <div className="submit">
-            <button type="submit">Login</button>
+            <button type="submit">{button}</button>
           </div>
         </form>
         <MessageBox

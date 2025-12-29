@@ -6,10 +6,12 @@ export interface IUser extends Document {
   surname: string;
   email: string;
   isMentor: boolean;
+  isAdmin: boolean;
   passwordHash: string;
   passwordSalt: string;
   dob: string;
   city: string;
+  group: number | null;
   setPassword: (password: string) => void;
   validatePassword: (password: string) => boolean;
 }
@@ -20,10 +22,12 @@ const UserSchema: Schema = new Schema(
     surname: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     isMentor: { type: Boolean, default: false },
+    isAdmin: { type: Boolean, default: false },
     passwordHash: { type: String, required: true },
     passwordSalt: { type: String, required: true },
     dob: { type: String, required: true },
     city: { type: String, required: true },
+    group: { type: Number, default: null },
   },
   { timestamps: true }
 );

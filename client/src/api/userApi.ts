@@ -51,6 +51,8 @@ export const handleLogin = async (
       const token = response.data.token;
 
       if (token) {
+        console.log(token);
+
         localStorage.setItem("authToken", token);
       }
     }
