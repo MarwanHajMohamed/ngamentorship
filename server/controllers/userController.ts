@@ -32,6 +32,8 @@ const authUser = asyncHandler(async (req, res) => {
       dob: user.dob,
       city: user.city,
       isMentor: user.isMentor,
+      isAdmin: user.isAdmin,
+      group: user.group,
     });
   } else {
     res.status(401).json({ message: "Invalid email or password" });
@@ -59,7 +61,6 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
     email,
     dob,
     city,
-    isMentor: false,
   });
 
   user.setPassword(password);
@@ -76,7 +77,6 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
       email: user.email,
       dob: user.dob,
       city: user.city,
-      isMentor: user.isMentor,
       token: generateToken(user._id.toString()),
     });
   } else {
@@ -147,6 +147,7 @@ const updateUserDetails = asyncHandler(async (req: Request, res: Response) => {
       dob: updatedUser.dob,
       city: updatedUser.city,
       isMentor: updatedUser.isMentor,
+      isAdmin: updatedUser.isAdmin,
     });
   } else {
     res.status(404);

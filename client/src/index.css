@@ -9,3 +9,11 @@ body {
   margin: 0;
   padding: 0;
 }
+.main-page-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-page-container .content {
+  display: flex;
+}
