@@ -1,11 +1,16 @@
 import axios from "axios";
-import { User } from "../types/user";
+import { RegisterUser, User } from "../types/user";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5001";
 
+export type LoginUser = {
+  role: "ADMIN" | "MENTOR" | "MENTEE";
+  _id: string;
+};
+
 // HANDLE REGISTER
 export const handleRegister = async (
-  user: User
+  user: RegisterUser
 ): Promise<"success" | "duplicate" | undefined> => {
   try {
     await axios.post(`${API_URL}/api/users`, user);
@@ -35,30 +40,62 @@ export const handleRegister = async (
   }
 };
 
-// HANDLE LOGIN
 export const handleLogin = async (
   email: string,
   password: string
-): Promise<"success" | undefined> => {
+): Promise<LoginUser> => {
+  // 1. Login
+  const loginRes = await axios.post(
+    `${API_URL}/api/users/login`,
+    { email, password },
+    { withCredentials: true }
+  );
+
+  const { token } = loginRes.data;
+
+  if (!token) {
+    throw new Error("No token returned");
+  }
+
+  localStorage.setItem("authToken", token);
+
+  // 2. Fetch profile
+  const profileRes = await axios.get(`${API_URL}/api/users/profile`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const user = profileRes.data;
+
+  localStorage.setItem("userRole", user.role);
+
+  return user;
+};
+
+// HANDLE LOGOUT
+export const handleLogout = async (): Promise<"success" | undefined> => {
   try {
-    const response = await axios.post(
-      `${API_URL}/api/users/login`,
-      { email, password },
+    await axios.post(
+      `${API_URL}/api/users/logout`,
+      {},
       { withCredentials: true }
     );
-
-    if (response.data) {
-      const token = response.data.token;
-
-      if (token) {
-        console.log(token);
-
-        localStorage.setItem("authToken", token);
-      }
-    }
-
     return "success";
   } catch (error) {
-    console.log(error);
+    console.error("Error logging out", error);
   }
+};
+
+// GET USERS BY ROLE
+export const getUsersByRole = async (role: string) => {
+  const token = localStorage.getItem("authToken");
+
+  const { data } = await axios.get(`${API_URL}/api/users?role=${role}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return data;
 };
