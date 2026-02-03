@@ -1,6 +1,11 @@
 .navbar-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  /* position: relative; */
+}
+
+.navbar-container .top-side {
+  display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #d5d5d5;
   padding: 10px 20px;
@@ -19,4 +24,68 @@
   justify-content: center;
   border-radius: 50%;
   color: white;
+  cursor: pointer;
+  transition: 100ms ease-in-out;
+}
+
+.navbar-container .right-side .profile:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-container .bottom-side {
+  display: flex;
+}
+
+.navbar-container .bottom-side .bottom-nav {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #d5d5d5;
+  height: 70px;
+  width: 100%;
+  justify-content: center;
+  padding-left: 30px;
+}
+
+.navbar-container .bottom-side .group {
+  color: #b0b0b0;
+  font-size: 14px;
+}
+
+/* ACCOUNT CONTAINER */
+.account-container {
+  position: relative;
+}
+
+.account-modal {
+  display: none;
+  position: absolute;
+  right: 0px;
+  top: 20px;
+  /* width: 100px; */
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.account-modal ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.account-modal li {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  /* list-style: none; */
+}
+
+.account-modal li:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.account-container .account-modal.show {
+  display: block;
+  color: black;
 }

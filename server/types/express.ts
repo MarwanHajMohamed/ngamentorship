@@ -12,7 +12,7 @@ interface User {
   firstName: string;
   surname: string;
   email: string;
-  isMentor?: boolean;
+  role: "ADMIN" | "MENTOR" | "MENTEE";
 }
 
 /**
@@ -24,7 +24,7 @@ export interface RequestWithUser extends ExpressRequest {
     firstName: string;
     surname: string;
     email: string;
-    isMentor?: boolean;
+    role: "ADMIN" | "MENTOR" | "MENTEE";
   };
 }
 
@@ -37,7 +37,7 @@ declare global {
         firstName: string;
         surname: string;
         email: string;
-        isMentor?: boolean;
+        role: "ADMIN" | "MENTOR" | "MENTEE";
       };
     }
   }

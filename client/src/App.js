@@ -9,6 +9,9 @@ import Dashboard from "./pages/dashboard/Dashboard.tsx";
 import Research from "./pages/research/Research.tsx";
 import Training from "./pages/training/Training.tsx";
 import Quizzes from "./pages/quizzes/Quizzes.tsx";
+import ManageGroup from "./pages/dashboard/Admin/ManageGroup/ManageGroup.tsx";
+import AdminDahboard from "./pages/dashboard/Admin/AdminDashboard.tsx";
+import MenteeDashboard from "./pages/dashboard/Mentee/MenteeDashboard.tsx";
 
 function App() {
   return (
@@ -33,12 +36,22 @@ function App() {
         <Route
           path="/"
           element={
-            <GuestProtectedRoute route="">
+            <GuestProtectedRoute route="login">
               <Main />
             </GuestProtectedRoute>
           }
         >
-          <Route index element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="admin" element={<AdminDahboard />}>
+              <Route path="group/:groupId" element={<ManageGroup />} />
+            </Route>
+            <Route path="mentor" element={<AdminDahboard />}>
+              <Route path="group/:groupId" element={<ManageGroup />} />
+            </Route>
+            <Route path="" element={<MenteeDashboard />}>
+              <Route path="group/:groupId" element={<ManageGroup />} />
+            </Route>
+          </Route>
           <Route path="/research" element={<Research />} />
           <Route path="/training" element={<Training />} />
           <Route path="/quizzes" element={<Quizzes />} />

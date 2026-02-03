@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/db";
 import userRoutes from "./routes/userRoutes";
+import groupRoutes from "./routes/groupRoutes";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.get("/", (_req, res) => {
 });
 
 app.use("/api/users", userRoutes);
+app.use("/api/group", groupRoutes);
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running in ${NODE_ENV} mode on port ${PORT}`);

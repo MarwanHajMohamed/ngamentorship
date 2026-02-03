@@ -6,12 +6,15 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../components/common components/SmallLoading/Loading";
 import { handleRegister } from "../../api/userApi";
 import MessageBox from "../../components/MessageBox/MessageBox";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateField } from "@mui/x-date-pickers/DateField";
+import { useGroup } from "../../hooks/useGroup";
 
 const Register = () => {
+  const { refresh } = useGroup();
+
   const navigate: NavigateFunction = useNavigate();
   const [firstName, setFirstName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
@@ -57,6 +60,8 @@ const Register = () => {
         password,
         dob: dob.format("DD/MM/YYYY"),
         city,
+        role: "MENTEE",
+        group: null,
       }).then((res) => {
         if (res === "duplicate") {
           setMessage({
@@ -64,6 +69,7 @@ const Register = () => {
             type: "error",
           });
         } else if (res === "success") {
+          refresh();
           setMessage({
             text: "You have successfully registered your account!",
             type: "success",
