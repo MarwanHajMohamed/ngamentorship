@@ -1,17 +1,18 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, Types } from "mongoose";
 import crypto from "crypto";
+
+export type UserRole = "ADMIN" | "MENTOR" | "MENTEE";
 
 export interface IUser extends Document {
   firstName: string;
   surname: string;
   email: string;
-  isMentor: boolean;
-  isAdmin: boolean;
+  role: UserRole;
   passwordHash: string;
   passwordSalt: string;
   dob: string;
   city: string;
-  group: number | null;
+  group: Types.ObjectId | null;
   setPassword: (password: string) => void;
   validatePassword: (password: string) => boolean;
 }
@@ -21,13 +22,16 @@ const UserSchema: Schema = new Schema(
     firstName: { type: String, required: true },
     surname: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    isMentor: { type: Boolean, default: false },
-    isAdmin: { type: Boolean, default: false },
+    role: {
+      type: String,
+      enum: ["ADMIN", "MENTOR", "MENTEE"],
+      default: "MENTEE",
+    },
     passwordHash: { type: String, required: true },
     passwordSalt: { type: String, required: true },
     dob: { type: String, required: true },
     city: { type: String, required: true },
-    group: { type: Number, default: null },
+    group: { type: Types.ObjectId, default: null, ref: "Group" },
   },
   { timestamps: true }
 );

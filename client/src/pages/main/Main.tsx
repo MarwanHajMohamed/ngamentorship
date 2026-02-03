@@ -8,7 +8,6 @@ const Main = () => {
     <div className="main-page-container">
       <Navbar />
       <div className="content">
-        <Sidebar />
         <Outlet />
       </div>
     </div>

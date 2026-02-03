@@ -7,8 +7,7 @@ export interface User {
   password: string;
   dob: string;
   city: string;
-  isMentor?: boolean;
-  isAdmin?: boolean;
+  role: "ADMIN" | "MENTOR" | "MENTEE";
   group?: number | null;
 }
 

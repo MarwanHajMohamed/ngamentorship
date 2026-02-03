@@ -1,10 +1,21 @@
 import React from "react";
 import "./sidebar.css";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Sidebar() {
+  const { user, isLoading } = useAuth();
+
+  const role = user?.role;
+
   const links = [
-    { name: "Dashboard", path: "/", icon: "fa-solid fa-chart-line" },
+    {
+      name: "Dashboard",
+      path: `/dashboard${
+        role === "ADMIN" ? "/admin" : role === "MENTEE" ? "" : "/mentor"
+      }`,
+      icon: "fa-solid fa-chart-line",
+    },
     {
       name: "Research",
       path: "/research",

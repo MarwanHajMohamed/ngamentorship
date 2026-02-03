@@ -31,21 +31,36 @@ const Login = () => {
     e.preventDefault();
     setButton(<LoadingSpinner />);
     setLoading(true);
+    console.log("Y");
 
     try {
-      await handleLogin(email, password).then((res) => {
-        if (res === "success") {
+      const user = await handleLogin(email, password);
+
+      console.log("Role: ", user.role);
+
+      switch (user.role) {
+        case "ADMIN":
+          navigate("/dashboard/admin");
+          break;
+        case "MENTOR":
+          navigate("/dashboard/mentor");
+          break;
+        case "MENTEE":
+          navigate("/dashboard");
+          break;
+        default:
           navigate("/");
-        } else {
-          setMessage({
-            text: "Email or password do not match.",
-            type: "error",
-          });
-        }
-        setButton("Login");
-        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+
+      setMessage({
+        text: "Email or password do not match.",
+        type: "error",
       });
-    } catch (error) {}
+      setButton("Login");
+      setLoading(false);
+    }
   };
 
   return (

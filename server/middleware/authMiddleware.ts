@@ -34,7 +34,7 @@ const protect = asyncHandler(
           firstName: user.firstName,
           surname: user.surname,
           email: user.email,
-          isMentor: user.isMentor,
+          role: user.role,
         };
 
         next();
@@ -56,11 +56,20 @@ const protect = asyncHandler(
  * Middleware used to protect routes from users who are not flagged as admin
  */
 const admin = (req: Request, res: Response, next: NextFunction) => {
-  if (req.user && req.user.isMentor === true) {
+  if (req.user && req.user.role === "ADMIN") {
     next();
   } else {
     res.status(403); // Change to 403 for "Forbidden"
     throw new Error("Not authorized as an admin");
+  }
+};
+
+const mentor = (req: Request, res: Response, next: NextFunction) => {
+  if (req.user && req.user.role === "MENTOR") {
+    next();
+  } else {
+    res.status(403); // Change to 403 for "Forbidden"
+    throw new Error("Not authorized as a mentor");
   }
 };
 
@@ -99,7 +108,7 @@ const optionalAuth = async (
       firstName: user.firstName,
       surname: user.surname,
       email: user.email,
-      isMentor: user.isMentor,
+      role: user.role,
     };
 
     next();
@@ -109,4 +118,4 @@ const optionalAuth = async (
   }
 };
 
-export { protect, admin, optionalAuth };
+export { protect, admin, mentor, optionalAuth };

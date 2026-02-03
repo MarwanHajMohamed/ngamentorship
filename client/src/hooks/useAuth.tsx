@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { User } from "../types/user";
+import { handleLogout } from "../api/userApi";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const API_URL = "http://localhost:5001";
 
@@ -9,11 +11,14 @@ export function useAuth() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const navigate: NavigateFunction = useNavigate();
+
   // Logout method
   const logout = () => {
+    handleLogout();
     setUser(null);
     localStorage.removeItem("authToken");
-    window.location.reload();
+    navigate("/login");
   };
 
   // Fetch user details on component mount

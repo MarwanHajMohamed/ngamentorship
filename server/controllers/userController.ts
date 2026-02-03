@@ -31,8 +31,7 @@ const authUser = asyncHandler(async (req, res) => {
       email: user.email,
       dob: user.dob,
       city: user.city,
-      isMentor: user.isMentor,
-      isAdmin: user.isAdmin,
+      role: user.role,
       group: user.group,
     });
   } else {
@@ -95,8 +94,11 @@ const getUserProfile = asyncHandler(async (req: Request, res: Response) => {
     throw new Error("User not found");
   }
 
-  // Return user details, excluding password
-  const user = await User.findById(req.user._id).select("-password");
+  // Return user details, excluding password and including group number
+  const user = await User.findById(req.user._id).select("-password").populate({
+    path: "group",
+    select: "groupNumber",
+  });
 
   if (!user) {
     res.status(404);
@@ -104,6 +106,24 @@ const getUserProfile = asyncHandler(async (req: Request, res: Response) => {
   }
 
   res.json(user);
+});
+
+/**
+ * @desc    Get users by role
+ * @route   GET /api/users?role=mentor
+ * @access  Private (Admin)
+ */
+const getUsersByRole = asyncHandler(async (req: Request, res: Response) => {
+  const { role } = req.query;
+
+  if (!role) {
+    res.status(400);
+    throw new Error("Role query parameter is required");
+  }
+
+  const users = await User.find({ role }).select("-password");
+
+  res.json(users);
 });
 
 /**
@@ -146,8 +166,7 @@ const updateUserDetails = asyncHandler(async (req: Request, res: Response) => {
       email: updatedUser.email,
       dob: updatedUser.dob,
       city: updatedUser.city,
-      isMentor: updatedUser.isMentor,
-      isAdmin: updatedUser.isAdmin,
+      role: updatedUser.role,
     });
   } else {
     res.status(404);
@@ -160,5 +179,6 @@ export {
   registerUser,
   logoutUser,
   getUserProfile,
+  getUsersByRole,
   updateUserDetails,
 };
