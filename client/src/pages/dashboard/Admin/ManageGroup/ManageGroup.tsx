@@ -118,8 +118,6 @@ const ManageGroup = () => {
 
     const members = buildMembers(editedMentors, editedMentees);
 
-    console.log(members);
-
     try {
       await updateGroup(groupId, { members });
 

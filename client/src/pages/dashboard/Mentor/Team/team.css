@@ -1,0 +1,54 @@
+.mentor-dashboard-container .teams-container {
+  width: 100%;
+}
+
+.mentor-dashboard-container .teams-container .title {
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.team-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #dcdcdc;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+.team-table thead td {
+  text-align: center;
+  padding: 10px 30px;
+  background-color: #f4f4f4;
+}
+
+.team-table td {
+  border-top: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  text-align: center;
+  place-items: center;
+}
+
+.team-table td:last-child {
+  border-right: none;
+}
+
+.team-table thead td {
+  border-top: none;
+}
+
+.team-table tbody td:first-child {
+  text-align: left;
+  padding-left: 10px;
+}
+
+.team-table thead td:first-child {
+  width: 80px;
+}
+
+.team-table .complete {
+  width: 22px;
+  height: 22px;
+  border: 1px solid #d9d9d9;
+}

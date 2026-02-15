@@ -1,3 +1,4 @@
+import "./admindashboard.css";
 import React, { useEffect, useRef, useState } from "react";
 import {
   NavigateFunction,
@@ -144,7 +145,7 @@ const AdminDahboard = () => {
               + New group
             </button>
             <div className="groups-container">
-              <div>Groups</div>
+              <div className="title">Groups</div>
               <div className="groups">
                 {groups.map((group) => (
                   <div

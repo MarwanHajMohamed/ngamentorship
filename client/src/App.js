@@ -10,8 +10,9 @@ import Research from "./pages/research/Research.tsx";
 import Training from "./pages/training/Training.tsx";
 import Quizzes from "./pages/quizzes/Quizzes.tsx";
 import ManageGroup from "./pages/dashboard/Admin/ManageGroup/ManageGroup.tsx";
-import AdminDahboard from "./pages/dashboard/Admin/AdminDashboard.tsx";
+import AdminDashboard from "./pages/dashboard/Admin/AdminDashboard.tsx";
 import MenteeDashboard from "./pages/dashboard/Mentee/MenteeDashboard.tsx";
+import MentorDashboard from "./pages/dashboard/Mentor/MentorDashboard.tsx";
 
 function App() {
   return (
@@ -42,15 +43,13 @@ function App() {
           }
         >
           <Route path="/dashboard" element={<Dashboard />}>
-            <Route path="admin" element={<AdminDahboard />}>
+            <Route path="admin" element={<AdminDashboard />}>
               <Route path="group/:groupId" element={<ManageGroup />} />
             </Route>
-            <Route path="mentor" element={<AdminDahboard />}>
+            <Route path="mentor" element={<MentorDashboard />}>
               <Route path="group/:groupId" element={<ManageGroup />} />
             </Route>
-            <Route path="" element={<MenteeDashboard />}>
-              <Route path="group/:groupId" element={<ManageGroup />} />
-            </Route>
+            <Route path="" element={<MenteeDashboard />} />
           </Route>
           <Route path="/research" element={<Research />} />
           <Route path="/training" element={<Training />} />

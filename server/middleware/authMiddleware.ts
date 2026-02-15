@@ -34,7 +34,10 @@ const protect = asyncHandler(
           firstName: user.firstName,
           surname: user.surname,
           email: user.email,
+          dob: user.dob,
+          city: user.city,
           role: user.role,
+          group: user.group ? user.group.toString() : null,
         };
 
         next();
@@ -108,7 +111,10 @@ const optionalAuth = async (
       firstName: user.firstName,
       surname: user.surname,
       email: user.email,
+      dob: user.dob,
+      city: user.city,
       role: user.role,
+      group: user.group ? user.group.toString() : null,
     };
 
     next();

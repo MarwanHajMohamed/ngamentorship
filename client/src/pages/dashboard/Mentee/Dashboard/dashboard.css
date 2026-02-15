@@ -1,0 +1,41 @@
+.mentee-dashboard-container .dashboard-container {
+  font-weight: 300;
+}
+
+.dashboard-container .title {
+  margin-bottom: 10px;
+}
+
+.mentee-dashboard-container .cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.mentee-dashboard-container .card-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #d5d5d5;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.mentee-dashboard-container .card-container .bottom {
+  display: flex;
+  flex-flow: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mentee-dashboard-container .card-container .bottom .time {
+  font-size: 12px;
+  color: #969696;
+}
+
+.mentee-dashboard-container .card-container .bottom .submission {
+  color: red;
+  font-size: 14px;
+}

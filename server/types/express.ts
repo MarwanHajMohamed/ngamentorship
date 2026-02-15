@@ -12,7 +12,11 @@ interface User {
   firstName: string;
   surname: string;
   email: string;
+  password: string;
+  dob: string;
+  city: string;
   role: "ADMIN" | "MENTOR" | "MENTEE";
+  group?: number | null;
 }
 
 /**
@@ -24,7 +28,10 @@ export interface RequestWithUser extends ExpressRequest {
     firstName: string;
     surname: string;
     email: string;
+    dob: string;
+    city: string;
     role: "ADMIN" | "MENTOR" | "MENTEE";
+    group?: string | null;
   };
 }
 
@@ -37,7 +44,10 @@ declare global {
         firstName: string;
         surname: string;
         email: string;
+        dob: string;
+        city: string;
         role: "ADMIN" | "MENTOR" | "MENTEE";
+        group?: string | null;
       };
     }
   }

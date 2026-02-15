@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./dashboard.css";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { Outlet } from "react-router-dom";

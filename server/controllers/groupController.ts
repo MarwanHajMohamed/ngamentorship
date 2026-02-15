@@ -40,26 +40,47 @@ const getAllGroups = asyncHandler(async (req: Request, res: Response) => {
  * @route GET /api/group/:id
  * @access Private (ADMIN)
  */
-const getGroupById = asyncHandler(async (req: Request, res: Response) => {
-  if (!req.user || req.user.role !== "ADMIN") {
-    res.status(403);
-    throw new Error("Not authorized");
+const getGroupById = asyncHandler(
+  async (req: Request, res: Response): Promise<void> => {
+    if (!req.user) {
+      res.status(401);
+      throw new Error("Not authorized");
+    }
+
+    const { id } = req.params;
+
+    const group = await groupModel.findById(id).populate({
+      path: "members.user",
+      select: "firstName surname email role dob city group",
+    });
+
+    if (!group) {
+      res.status(404);
+      throw new Error("Group not found");
+    }
+
+    // Admin can access any group
+    if (req.user.role === "ADMIN") {
+      res.status(200).json(group);
+      return;
+    }
+
+    // Normal users can only access their own group
+    if (req.user.group?.toString() !== group._id.toString()) {
+      console.log(
+        "User group: ",
+        req.user.group,
+        ", group: ",
+        group.groupNumber
+      );
+
+      res.status(403);
+      throw new Error("Not authorized to view this group");
+    }
+
+    res.status(200).json(group);
   }
-
-  const { id } = req.params;
-
-  const group = await groupModel.findById(id).populate({
-    path: "members.user",
-    select: "firstName surname email role dob city group",
-  });
-
-  if (!group) {
-    res.status(404);
-    throw new Error("Group not found");
-  }
-
-  res.status(200).json(group);
-});
+);
 
 /**
  * Create a new group
@@ -86,10 +107,6 @@ const createGroup = asyncHandler(async (req: Request, res: Response) => {
   }
 
   const finalMembers = [
-    {
-      user: req.user._id,
-      role: "ADMIN",
-    },
     ...members.map((m: any) => ({
       user: m.userId,
       role: m.role,
